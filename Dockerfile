@@ -11,6 +11,9 @@ RUN chmod +x ./gradlew
 # Build the application
 RUN ./gradlew clean build
 
+# Debug: List files in the build directory to confirm the JAR file is there
+RUN ls -l /app/build/libs/
+
 # Use an OpenJDK runtime image for running the application
 FROM openjdk:17-jdk-slim
 WORKDIR /app
