@@ -15,10 +15,8 @@ RUN ./gradlew clean build
 FROM openjdk:17-jdk-slim
 WORKDIR /app
 
-
-# Copy any JAR file from the builder stage
-COPY --from=builder /app/build/libs/*.jar /app/
-
+# Copy the JAR file from the build stage
+COPY --from=builder /app/build/libs/acendMarketing-0.0.1-SNAPSHOT.jar /app/
 
 # Ensure the JAR file is executable
 RUN chmod +x /app/acendMarketing-0.0.1-SNAPSHOT.jar
@@ -26,7 +24,7 @@ RUN chmod +x /app/acendMarketing-0.0.1-SNAPSHOT.jar
 # List files to confirm JAR file is in the container
 RUN ls -l /app
 
-# Expose the port your application runs on
+# Expose the port the application runs on
 EXPOSE 1712
 
 # Command to run the application
