@@ -15,8 +15,10 @@ RUN ./gradlew clean build
 FROM openjdk:17-jdk-slim
 WORKDIR /app
 
-# Copy the built JAR file from the builder stage without renaming it
-COPY --from=builder /app/build/libs/acendMarketing-0.0.1-SNAPSHOT.jar /app/acendMarketing-0.0.1-SNAPSHOT.jar
+
+# Copy any JAR file from the builder stage
+COPY --from=builder /app/build/libs/*.jar /app/
+
 
 # Ensure the JAR file is executable
 RUN chmod +x /app/acendMarketing-0.0.1-SNAPSHOT.jar
