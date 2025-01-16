@@ -14,6 +14,7 @@ public class PublicationResponseDTO {
     private float orgPrice;
     private float marginPrice;
     private float usdPrice;
+    private float gstPrice;
     private Integer wordsAllowed;
     private String backlinksAllowed;
     private Integer tat;

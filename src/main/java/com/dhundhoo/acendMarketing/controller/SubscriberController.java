@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
+
+@CrossOrigin
 @RestController
 @RequestMapping("/api/subscribers")
 public class SubscriberController {
@@ -21,7 +23,7 @@ public class SubscriberController {
     @Autowired
     private SubscriberService subscriberService;
 
-    @PostMapping("/conactUs")
+    @PostMapping("/contactUs")
     public ResponseEntity<?> registerUser(@Valid @RequestBody Subscriber subscriber) {
         try {
             Subscriber registeredUser = subscriberService.registerSubscriber(subscriber);

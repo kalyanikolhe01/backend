@@ -28,14 +28,15 @@ public class Subscriber  {
 
     private String userId = UUID.randomUUID().toString();
 
-    public  String firstName;
+    @NotBlank(message = "please enter userName")
+    @NotNull (message = "please enter userName")
+    public  String userName;
 
     @NotNull(message = "Email is required")
     @NotBlank(message = "Email is required")
     @Email(message = "Invalid email format")
     private String email;
 
-    private String lastName;
 
     @Min(value = 1000000000L, message = "Mobile number should be at least 10 digits")
     private long mobileNumber;
