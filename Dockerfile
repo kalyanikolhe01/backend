@@ -1,31 +1,14 @@
-# Use a Gradle image for building the application
-FROM gradle:7.6.1-jdk17 AS builder
+# Use a lightweight Java runtime as the base image
+FROM eclipse-temurin:17-jdk-alpine
+
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy application files
-COPY . .
+# Copy the JAR file into the container
+COPY build/libs/acendMarketing-0.0.1-SNAPSHOT.jar app.jar
 
-# Set execute permissions for gradlew
-RUN chmod +x ./gradlew
+# Expose the application's port
+EXPOSE 8080
 
-# Build the application
-RUN ./gradlew clean build
-
-# Use an OpenJDK runtime image for running the application
-FROM openjdk:17-jdk-slim
-WORKDIR /app
-
-# Copy the JAR file from the build stage
-COPY --from=builder /app/build/libs/acendMarketing-0.0.1-SNAPSHOT.jar /app/
-
-# Ensure the JAR file is executable
-RUN chmod +x /app/acendMarketing-0.0.1-SNAPSHOT.jar
-
-# List files to confirm JAR file is in the container
-RUN ls -l /app
-
-# Expose the port the application runs on
-EXPOSE 1712
-
-# Command to run the application
-ENTRYPOINT ["java", "-Dserver.port=1712", "-jar", "/app/acendMarketing-0.0.1-SNAPSHOT.jar"]
+# Run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
