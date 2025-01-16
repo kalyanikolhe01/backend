@@ -1,14 +1,15 @@
-# Use a lightweight Java runtime as the base image
-FROM eclipse-temurin:17-jdk-alpine
 
-# Set the working directory in the container
+# Use OpenJDK 17 as the base image
+FROM openjdk:17-jdk-slim as build
+
+# Set the working directory
 WORKDIR /app
 
 # Copy the JAR file into the container
-COPY build/libs/acendMarketing-0.0.1-SNAPSHOT.jar app.jar
+COPY target/practice-0.0.1-SNAPSHOT.jar app.jar
 
-# Expose the application's port
-EXPOSE 8080
+# Expose the application port (replace with your app's actual port)
+EXPOSE 1712
 
-# Run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Command to run the Spring Boot application
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
