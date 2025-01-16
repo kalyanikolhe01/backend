@@ -14,4 +14,9 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowCredentials(true)
                 .maxAge(3600);  // Cache pre-flight request for 1 hour
     }
+
+
+
+
+
 }
